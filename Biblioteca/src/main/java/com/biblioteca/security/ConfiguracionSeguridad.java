@@ -1,6 +1,6 @@
 package com.biblioteca.security;
 
-import com.chibcha.servicios.CustomUserService;
+import com.biblioteca.service.CustomUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,7 +24,7 @@ public class ConfiguracionSeguridad extends WebSecurityConfigurerAdapter {
     private CustomUserService userService;
 
     @Autowired
-    private com.chibcha.seguridad.JWTTokenHelper jWTTokenHelper;
+    private JWTTokenHelper jWTTokenHelper;
 
     @Autowired
     private AuthenticationEntryPoint authenticationEntryPoint;
@@ -34,11 +34,11 @@ public class ConfiguracionSeguridad extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
-        auth.userDetailsService(userService).passwordEncoder(EncriptarContraseña());
+        auth.userDetailsService(userService).passwordEncoder(Encryptpassword());
     }
 
     @Bean
-    public PasswordEncoder EncriptarContraseña(){
+    public PasswordEncoder Encryptpassword(){
         return new BCryptPasswordEncoder();
     }
 
@@ -54,7 +54,7 @@ public class ConfiguracionSeguridad extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint(authenticationEntryPoint).and()
                 .authorizeRequests((request) -> request.antMatchers("/h2-console/**", "/autenticacion/**").permitAll()
                         .antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest().authenticated())
-                .addFilterBefore(new com.chibcha.seguridad.JWTAuthenticationFilter(userService, jWTTokenHelper),
+                .addFilterBefore(new com.biblioteca.security.JWTAuthenticationFilter(userService, jWTTokenHelper),
                         UsernamePasswordAuthenticationFilter.class);
 
         http.csrf().disable().cors().and().headers().frameOptions().disable();

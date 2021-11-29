@@ -1,10 +1,10 @@
 package com.biblioteca.controller;
 
-import com.chibcha.entidad.UsuarioSeguridad;
-import com.chibcha.seguridad.JWTTokenHelper;
-import com.chibcha.seguridad.respuesta.LoginResponse;
-import com.chibcha.seguridad.respuesta.UserInfo;
-import com.chibcha.seguridad.solicitud.AuthenticationRequest;
+import com.biblioteca.entity.UserSecurity;
+import com.biblioteca.security.JWTTokenHelper;
+import com.biblioteca.security.respuesta.LoginResponse;
+import com.biblioteca.security.respuesta.UserInfo;
+import com.biblioteca.security.solicitud.AuthenticationRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -37,7 +37,7 @@ public class AutenticacionControlador {
         final Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 authenticationRequest.getUserName(), authenticationRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        UsuarioSeguridad user=(UsuarioSeguridad) authentication.getPrincipal();
+        UserSecurity user=(UserSecurity) authentication.getPrincipal();
         String jwtToken=jWTTokenHelper.generateToken(user.getUsername());
         LoginResponse response=new LoginResponse();
         response.setToken(jwtToken);
@@ -47,7 +47,7 @@ public class AutenticacionControlador {
 
     @GetMapping("/auth/userinfo")
     public ResponseEntity<?> getUserInfo(Principal user){
-        UsuarioSeguridad userObj=(UsuarioSeguridad) userDetailsService.loadUserByUsername(user.getName());
+        UserSecurity userObj=(UserSecurity) userDetailsService.loadUserByUsername(user.getName());
         UserInfo userInfo=new UserInfo();
         userInfo.setFirstName(userObj.getUsername());
         userInfo.setRoles(userObj.getAuthorities().toArray());

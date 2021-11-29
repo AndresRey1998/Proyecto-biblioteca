@@ -1,8 +1,9 @@
 package com.biblioteca.service;
 
-import com.chibcha.entidad.Usuario;
-import com.chibcha.entidad.UsuarioSeguridad;
-import com.chibcha.repositorio.UsuarioSRepositorio;
+import com.biblioteca.entity.User;
+import com.biblioteca.entity.UserSecurity;
+import com.biblioteca.repository.UserSecurityRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,19 +18,19 @@ import javax.transaction.Transactional;
 public class CustomUserService implements UserDetailsService {
 
     @Autowired
-    UsuarioSRepositorio userDetailsRepository;
+    UserSecurityRepository userDetailsRepository;
 
-    public CustomUserService(UsuarioSRepositorio userDetailsRepository){
+    public CustomUserService(UserSecurityRepository userDetailsRepository){
         this.userDetailsRepository = userDetailsRepository;
 
     }
 
     @Override
-    public UserDetails loadUserByUsername(String nombreUsuario) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
 
-        Usuario user=this.userDetailsRepository.findByUserName(nombreUsuario);
-        UsuarioSeguridad usuarioSeguridad = new UsuarioSeguridad(user);
-        return usuarioSeguridad;
+        User user=this.userDetailsRepository.findByUserName(userName);
+        UserSecurity userSecurity = new UserSecurity(user);
+        return userSecurity;
 
     }
 }

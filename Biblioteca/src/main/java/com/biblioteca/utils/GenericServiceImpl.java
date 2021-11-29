@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public abstract class GenericServiceImpl<T, ID extends Serializable> implements com.medicalsoft.utils.GenericServiceAPI<T, ID> {
+public abstract class GenericServiceImpl<T, ID extends Serializable> implements GenericServiceAPI<T, ID> {
 
     @Override
     public T save (T entity){
