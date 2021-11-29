@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Entity
-@Table(name="user")
+@Table(name="userr")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -19,6 +19,9 @@ public class User implements Serializable {
 
     @Column(name="username", unique=true)
     private String userName;
+
+    @Column(name="email", unique = true)
+    private String email;
 
     @Column(name="password")
     private String password;
@@ -62,6 +65,14 @@ public class User implements Serializable {
 
     public String getRoles() {
         return roles;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setRoles(String roles) {
