@@ -13,7 +13,7 @@ import java.util.List;
 
 @CrossOrigin(origins = {"https://localhost:4200/", "http://localhost:3000/"} ,maxAge = 3600, methods={RequestMethod.GET,RequestMethod.OPTIONS,RequestMethod.PATCH,RequestMethod.POST,RequestMethod.DELETE,RequestMethod.HEAD,})
 @RestController
-@RequestMapping("/usuario")
+@RequestMapping("/user")
 public class UserController {
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -25,7 +25,7 @@ public class UserController {
     public List<User> getAll(){ return userServiceAPI.getAll();
     }
 
-    @PostMapping(value="/saveUsuario")
+    @PostMapping(value="/saveUser")
     public ResponseEntity<User> save(@RequestBody User user){
         String password = passwordEncoder.encode(user.getPassword());
         user.setPassword(password);

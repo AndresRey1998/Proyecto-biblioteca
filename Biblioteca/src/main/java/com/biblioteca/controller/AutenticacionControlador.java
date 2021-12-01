@@ -42,6 +42,7 @@ public class AutenticacionControlador {
         LoginResponse response=new LoginResponse();
         response.setToken(jwtToken);
         response.setId(user.getUser().getId());
+        response.setRol(user.getAuthorities().toString());
         return ResponseEntity.ok(response);
     }
 

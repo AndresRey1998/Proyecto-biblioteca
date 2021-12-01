@@ -3,6 +3,15 @@ package com.biblioteca.security.respuesta;
 public class LoginResponse {
     private String token;
     private Integer id;
+    private String rol;
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
 
     public Integer getId() {
         return id;
