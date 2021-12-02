@@ -43,6 +43,22 @@ const routes = [
     // lazy-loaded
     component: BoardUser,
   },
+  {
+    path: "/users",
+    name: "users",
+    // lazy-loaded
+    component:  () => import("./components/UserList"),
+  },
+  {
+    path: "/users/:id",
+    name: "users-details",
+    component: () => import("./components/User")
+  },
+  {
+    path: "/add",
+    name: "add",
+    component: () => import("./components/addUser")
+  }
 ];
 
 const router = createRouter({

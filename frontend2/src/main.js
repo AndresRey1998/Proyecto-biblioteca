@@ -5,9 +5,18 @@ import store from "./store";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from './plugins/font-awesome'
+import { loadFonts } from './plugins/webfontloader'
+import vuetify from './plugins/vuetify'
+import 'vuetify/styles'
+import VueGoodTablePlugin from 'vue-good-table-next';
+import 'vue-good-table-next/dist/vue-good-table-next.css'
+
+loadFonts()
 
 createApp(App)
   .use(router)
   .use(store)
+  .use(vuetify)
+  .use(VueGoodTablePlugin)
   .component("font-awesome-icon", FontAwesomeIcon)
   .mount("#app");

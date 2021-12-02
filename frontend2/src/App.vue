@@ -11,6 +11,34 @@
         <li v-if="showAdminBoard" class="nav-item">
           <router-link to="/admin" class="nav-link">Admin Board</router-link>
         </li>
+        <li class="nav-item nav-link" v-if="showAdminBoard">
+   <div class="text-center">
+      <v-menu offset-y>
+        <template v-slot:activator="{ props }">
+          <v-btn
+            style=" all: unset;"
+            v-bind="props"
+          >
+            Users
+          </v-btn>
+        </template>
+        <v-card
+    class="mx-auto"
+    max-width="400"
+    tile
+  >
+        <v-list>
+            <router-link to="/add" class="nav-link">Add user</router-link>
+            <router-link to="/users" class="nav-link">User list</router-link>
+        </v-list>
+          </v-card>
+
+      </v-menu>
+      
+    </div>
+    
+        </li>
+
         <li class="nav-item">
           <router-link v-if="currentUser" to="/user" class="nav-link">User</router-link>
         </li>
@@ -71,3 +99,4 @@ export default {
   }
 };
 </script>
+
