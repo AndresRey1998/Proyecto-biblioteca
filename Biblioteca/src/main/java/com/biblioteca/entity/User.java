@@ -1,5 +1,7 @@
 package com.biblioteca.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -34,6 +36,14 @@ public class User implements Serializable {
 
     @Column(name="enable")
     private boolean enable;
+
+    @JsonIgnore
+    @OneToMany(mappedBy="user", targetEntity = EditionBook.class)
+    private List<EditionBook> editionBooks;
+
+    @JsonIgnore
+    @OneToMany(mappedBy="user", targetEntity = Book.class)
+    private List<Book> books;
 
     public User(){
 
@@ -106,5 +116,47 @@ public class User implements Serializable {
             return Arrays.asList(this.permits.split(","));
         }
         return new ArrayList<>();
+    }
+
+    public List<EditionBook> getEditionBooks() {
+        return editionBooks;
+    }
+
+    public void setEditionBooks(List<EditionBook> editionBooks) {
+        this.editionBooks = editionBooks;
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
+    }
+
+    public EditionBook addEditionUser(EditionBook editionBook) {
+        getEditionBooks().add(editionBook);
+        editionBook.setUser(this);
+
+        return editionBook;
+    }
+
+    public EditionBook removeEditionUser(EditionBook editionBook) {
+        getEditionBooks().remove(editionBook);
+        editionBook.setUser(null);
+        return editionBook;
+    }
+
+    public Book addBook(Book book) {
+        getBooks().add(book);
+        book.setUser(this);
+
+        return book;
+    }
+
+    public Book removeBook(Book book) {
+        getBooks().remove(book);
+        book.setUser(null);
+        return book;
     }
 }
