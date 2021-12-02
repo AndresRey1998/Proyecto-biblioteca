@@ -37,9 +37,6 @@ public class User implements Serializable {
     @Column(name="enable")
     private boolean enable;
 
-    @JsonIgnore
-    @OneToMany(mappedBy="user", targetEntity = EditionBook.class)
-    private List<EditionBook> editionBooks;
 
     @JsonIgnore
     @OneToMany(mappedBy="user", targetEntity = Book.class)
@@ -118,13 +115,6 @@ public class User implements Serializable {
         return new ArrayList<>();
     }
 
-    public List<EditionBook> getEditionBooks() {
-        return editionBooks;
-    }
-
-    public void setEditionBooks(List<EditionBook> editionBooks) {
-        this.editionBooks = editionBooks;
-    }
 
     public List<Book> getBooks() {
         return books;
@@ -134,18 +124,7 @@ public class User implements Serializable {
         this.books = books;
     }
 
-    public EditionBook addEditionUser(EditionBook editionBook) {
-        getEditionBooks().add(editionBook);
-        editionBook.setUser(this);
 
-        return editionBook;
-    }
-
-    public EditionBook removeEditionUser(EditionBook editionBook) {
-        getEditionBooks().remove(editionBook);
-        editionBook.setUser(null);
-        return editionBook;
-    }
 
     public Book addBook(Book book) {
         getBooks().add(book);

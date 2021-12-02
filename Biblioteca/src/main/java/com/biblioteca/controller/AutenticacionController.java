@@ -21,7 +21,7 @@ import java.security.spec.InvalidKeySpecException;
 @RestController
 @RequestMapping("/autenticacion")
 @CrossOrigin(origins = {"http://localhost:8081/", "https://chibchaweb.vercel.app/", "https://chibchaweb-backend.herokuapp.com/" } ,maxAge = 3600, methods={RequestMethod.GET,RequestMethod.OPTIONS,RequestMethod.PATCH,RequestMethod.POST,RequestMethod.DELETE,RequestMethod.HEAD,})
-public class AutenticacionControlador {
+public class AutenticacionController {
     @Autowired
     private AuthenticationManager authenticationManager;
 

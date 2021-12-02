@@ -27,9 +27,6 @@ public class EditionBook {
     @Column(name = "telephone_editorial")
     private Integer telephone;
 
-    @ManyToOne(targetEntity = User.class)
-    @JoinColumn(name="user")
-    private User user;
 
     @JsonIgnore
     @OneToMany(mappedBy="edition", targetEntity = DateEdition.class)
@@ -38,6 +35,10 @@ public class EditionBook {
     @JsonIgnore
     @OneToMany(mappedBy="edition", targetEntity = Book.class)
     private List<Book> books;
+
+
+
+
 
 
     public EditionBook(){
@@ -84,13 +85,6 @@ public class EditionBook {
         this.telephone = telephone;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public List<DateEdition> getDateEditions() {
         return dateEditions;
