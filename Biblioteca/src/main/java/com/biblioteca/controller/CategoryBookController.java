@@ -46,6 +46,15 @@ public class CategoryBookController {
         }
         return ResponseEntity.ok().body(categoryBook);
     }
+    @GetMapping(value = "/bookCategory/{id}")
+    public List<Book> getBooks(@PathVariable(value = "id") Integer id) throws ResourceNotFoundException {
+        CategoryBook categoryBook = categoryBookServiceAPI.get(id);
+        if (categoryBook == null) {
+            new ResourceNotFoundException("Record not found for <usuario>" + id);
+        }
+        List<Book> books = categoryBook.getBooks();
+        return books;
+    }
 
     @DeleteMapping(value="/deleteCategoryBook/{id}")
     public ResponseEntity<CategoryBook> delete(@PathVariable Integer id){
