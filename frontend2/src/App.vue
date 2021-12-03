@@ -28,30 +28,54 @@
     tile
   >
         <v-list>
-            <router-link to="/add" class="nav-link">Add user</router-link>
-            <router-link to="/users" class="nav-link">User list</router-link>
+            <router-link to="/addUser" class="nav-link">Add</router-link>
+            <router-link to="/listUser" class="nav-link">List</router-link>
         </v-list>
           </v-card>
 
       </v-menu>
       
     </div>
-    
         </li>
+       <li class="nav-item nav-link">
+   <div class="text-center">
+      <v-menu offset-y>
+        <template v-slot:activator="{ props }">
+          <v-btn
+            style=" all: unset;"
+            v-bind="props"
+          >
+            Books
+          </v-btn>
+        </template>
+        <v-card
+    class="mx-auto"
+    max-width="400"
+    tile
+  >
+        <v-list>
+            <router-link to="/addBook" class="nav-link">Add</router-link>
+            <router-link to="/listBook" class="nav-link">List</router-link>
+        </v-list>
+          </v-card>
 
+      </v-menu>
+      
+    </div>
+        </li>
         <li class="nav-item">
-          <router-link v-if="currentUser" to="/user" class="nav-link">User</router-link>
+          <router-link v-if="currentUser" to="/user" class="nav-link">History</router-link>
         </li>
       </div>
       <div v-if="!currentUser" class="navbar-nav ml-auto">
         <li class="nav-item">
           <router-link to="/register" class="nav-link">
-            <font-awesome-icon icon="user-plus" />Registrarse
+            <font-awesome-icon icon="user-plus" />Register
           </router-link>
         </li>
         <li class="nav-item">
           <router-link to="/login" class="nav-link">
-            <font-awesome-icon icon="sign-in-alt" /> Iniciar sesión
+            <font-awesome-icon icon="sign-in-alt" />Log In
           </router-link>
         </li>
       </div>
@@ -64,7 +88,7 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" @click.prevent="logOut">
-            <font-awesome-icon icon="sign-out-alt" /> Cerrar sesión
+            <font-awesome-icon icon="sign-out-alt" /> Log out
           </a>
         </li>
       </div>

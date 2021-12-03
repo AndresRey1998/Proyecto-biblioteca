@@ -12,7 +12,7 @@
         <v-list-item-title class="text-h5 mb-1">
           Information
         </v-list-item-title>
-       <v-form
+    <v-form
     ref="form"
     v-model="valid"
     lazy-validation
@@ -20,23 +20,32 @@
     <v-text-field
       v-model="username"
       :counter="10"
-      :rules="nameRules"
       label="Username"
       required
     ></v-text-field>
 
     <v-text-field
       v-model="email"
-      :rules="emailRules"
       label="Email"
       required
     ></v-text-field>
+<v-layout row wrap>
 
-   <v-checkbox
-      v-model="checkbox"
-      color="indigo darken-3"
-      :label="`Administrator permissions`"
-    ></v-checkbox>
+<v-flex md4 class="lg5-custom">    
+  <v-checkbox 
+      v-model="selected"
+      label="Admin"
+      value="admin"
+    ></v-checkbox></v-flex>
+
+  <v-flex md4 class="lg5-custom">    
+  <v-checkbox 
+      v-model="selected"
+      label="User"
+      value="user"
+    ></v-checkbox></v-flex>
+
+</v-layout>
   </v-form>  
         <v-list-item-subtitle>Warning, It is NOT possible to revert the changes after editing.</v-list-item-subtitle>
       </v-list-item-content>
@@ -66,6 +75,7 @@
         rounded
         text
         color="error"
+        @click="closeModalEdit()"
       >
         Cancel
       </v-btn>
@@ -75,28 +85,39 @@
 
 <script>
 import UserDataService from "../../services/userData.service";
+import { inject } from 'vue'
+import { closeModal } from "jenesius-vue-modal";
 
 export default {
     async setup(){
+            const emitter = inject("emitter");
 
-    },
+             emitter.emit('refreshEvent')
 
+  },
     props:{
       id: Number,
       username: String,
       email: String,
-      roles: String
+      roles: String,
+      state: Boolean,
     },
     methods:{
-      editUser() {
-      UserDataService.updateUser(this.props)
-        .then((response) => {
-          console.log(response.data);
-        }).catch((e) => {
-          console.log(e);
-      });
-      
-  
+
+    editUser() {
+      UserDataService.updateUser(this.data())
+    },
+
+    closeModalEdit(){
+      closeModal();
+    },
+    data: function(){
+      return {
+        id_current: this.id,
+        userName: this.username,
+        email: this.email,
+        state: this.state,
+      }
     },
   }
 }

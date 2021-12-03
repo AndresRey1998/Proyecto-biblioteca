@@ -20,6 +20,7 @@
     "core-js": "^3.6.5",
     "jenesius-vue-modal": "^1.4.6",
     "jquery": "^3.6.0",
+    "mitt": "^3.0.0",
     "popper.js": "^1.16.1",
     "roboto-fontface": "*",
     "vee-validate": "^4.5.6",

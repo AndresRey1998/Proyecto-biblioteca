@@ -44,8 +44,8 @@ const routes = [
     component: BoardUser,
   },
   {
-    path: "/users",
-    name: "users",
+    path: "/listUser",
+    name: "listUser",
     // lazy-loaded
     component:  () => import("./components/UserList"),
   },
@@ -55,8 +55,8 @@ const routes = [
     component: () => import("./components/User")
   },
   {
-    path: "/add",
-    name: "add",
+    path: "/addUser",
+    name: "addUser",
     component: () => import("./components/addUser")
   }
 ];

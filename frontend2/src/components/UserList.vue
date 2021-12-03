@@ -1,30 +1,42 @@
 <template>
   <div>
+    <h1>List of users</h1>
     <vue-good-table
       :columns="columns"
       :rows="users"
       :row-style-class="rowStyleClassFn"
       :paginate="true"
-      :responsive="true">
+      :responsive="true"
+      :pagination-options="{
+      enabled: true,
+      mode: 'records',
+      perPage: 5,
+      }"
+    :search-options="{
+    enabled: true,
+    trigger: 'enter',
+    skipDiacritics: true,
+    placeholder: 'Search here an user!'}"
+    >
           <template #table-row="props">
                 <span v-if="props.column.field == 'actions'">
                   <button size="sm" @click="modalEdit(props)" variant="primary" class="mr-2" title="Edit">
                     <i>
-                        <font-awesome-icon icon="edit" /> Edit
+                        Edit
                       </i>
                   </button>
-                  <button size="sm" variant="danger" class="mr-2" title="Hapus">
+                  <button size="sm" variant="danger" class="mr-2" title="Hapus" @click="disableEnableUser(props)">
                     <i>
-                        <font-awesome-icon icon="trash" /> Disable
+                         Disable
                       </i>
                   </button>
                 </span>
                     <span v-if="props.column.field == 'state'">
-                      <span v-if="props.row.state == 'Activated'">
-                        <span style="font-weight: bold; color: green;">{{props.row.state}}</span> 
+                      <span v-if="props.row.state == true">
+                        <span style="font-weight: bold; color: green;">Activated</span> 
                       </span>
                       <span v-else>
-                        <span style="font-weight: bold; color: red;">{{props.row.state}}</span> 
+                        <span style="font-weight: bold; color: red;">Not activated</span> 
                     </span>
                   </span>
                   
@@ -40,42 +52,56 @@
 import UserDataService from "../services/userData.service";
 import { openModal } from "jenesius-vue-modal";
 import ModalEditUser from './modals/ModalEditUser.vue'
+import { inject } from 'vue'
 
 export default {
-  name: "users-list",
+  name: "listusers",
   data() {
     return {
       users: [],
       columns: [
         { label: "ID", field: "id"},
-        { label: "Username", field: "username" },
+        { label: "Username", field: "username",    
+        filterOptions: {
+  	    enabled: true, 
+        placeholder: 'Filter by user', 
+        filterDropdownItems: [],
+        filterFn: this.columnFilterFn,
+      },
+    },
         { label: "Email", field: "email" },
         { label: "State", field: "state" },
-        { label: "Permissions", field: "roles" },
+        { label: "Permissions", field: "roles", sortable: false },
         { label: "Actions", field: "actions", sortable: false}
       ],
     };
   },
   methods: {
+    columnFilterFn: function(data, filterString) {
+    return data.includes(filterString);
+  },
+    disableEnableUser(props){
+      UserDataService.disableEnableUser(props.row.id)
+    },
     modalEdit(props){
       openModal(ModalEditUser, {
+        id: props.row.id,
         username: props.row.username,
         email: props.row.email,
-        roles: this.users.roles
+        roles: props.row.roles,
+        state: props.row.state
       })
       
       document.getElementsByTagName('body')[0].style = 'overflow:hidden;';
   },
 
   rowStyleClassFn(row) {
-    console.log(row)
-    return row.state === true ? row.state="Activated" : 'Not Activated';
+
   },
     retrieveUsers() {
       UserDataService.getAll()
         .then((response) => {
           this.users = response.data.map(this.getDisplayUser);
-          console.log(response.data);
         })
         .catch((e) => {
           console.log(e);
@@ -99,12 +125,12 @@ export default {
           console.log(e);
         });
     },
-
+  
     getDisplayUser(user) {
       return {
         id: user.id,
-        username: user.userName.length > 30 ? user.userName.substr(0, 30) + "..." : user.userName,
-        email: user.email.length > 30 ? user.email.substr(0, 30) + "..." : user.email,
+        username: user.userName,
+        email: user.email,
         state: user.enable,
         roles: user.roles
       };
@@ -112,6 +138,13 @@ export default {
   },
   mounted() {
     this.retrieveUsers();
+    const emitter = inject("emitter");
+    emitter.on('refreshEvent', () => {
+      console.log("TRIGGER")
+      this.retrieveUsers();
+      this.refreshList()
+      
+    })
   },
 };
 </script>
