@@ -1,7 +1,9 @@
 <template>
   <div id="app">
-    <nav class="navbar navbar-expand navbar-dark bg-dark">
-      <a href="/" class="navbar-brand">Biblioteca</a>
+    <nav class="navbar navbar-expand navbar-dark ">
+      <a href="/" class="">
+      <img v-bind:src="require('./assets/img/logo-chikito.png')" alt="HANCOCK BOOKS">
+      </a>
       <div class="navbar-nav mr-auto">
         <li class="nav-item">
           <router-link to="/home" class="nav-link">
@@ -100,3 +102,6 @@ export default {
 };
 </script>
 
+<style>
+   @import './assets/css/style.css';
+</style>

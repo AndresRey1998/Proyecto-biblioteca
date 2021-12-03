@@ -1500,7 +1500,7 @@ header.header-prepare .nav-bar-icon > span::after {
     position: relative;
 }
 
-.sub-dropdown.dropdown {
+.dropdown {
     top: 100%;
     left: 0;
     position: absolute;
