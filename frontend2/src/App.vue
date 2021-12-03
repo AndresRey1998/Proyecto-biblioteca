@@ -1,9 +1,7 @@
 <template>
-  <div id="app">
-    <nav class="navbar navbar-expand navbar-dark ">
-      <a href="/" class="">
-      <img v-bind:src="require('./assets/img/logo-chikito.png')" alt="HANCOCK BOOKS">
-      </a>
+<div id="app">
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
+      <a href="/" class="navbar-brand">Library</a>
       <div class="navbar-nav mr-auto">
         <li class="nav-item">
           <router-link to="/home" class="nav-link">
@@ -11,7 +9,7 @@
           </router-link>
         </li>
         <li v-if="showAdminBoard" class="nav-item">
-          <router-link to="/admin" class="nav-link">Admin Board</router-link>
+          <router-link to="/admin" class="nav-link">Audit</router-link>
         </li>
         <li class="nav-item nav-link" v-if="showAdminBoard">
    <div class="text-center">
@@ -48,7 +46,7 @@
       <div v-if="!currentUser" class="navbar-nav ml-auto">
         <li class="nav-item">
           <router-link to="/register" class="nav-link">
-            <font-awesome-icon icon="user-plus" /> Registrarse
+            <font-awesome-icon icon="user-plus" />Registrarse
           </router-link>
         </li>
         <li class="nav-item">
@@ -71,15 +69,20 @@
         </li>
       </div>
     </nav>
-
     <div class="container">
       <router-view />
     </div>
   </div>
+  <Suspense>
+  <widget-container-modal />
+  </Suspense>
 </template>
 
 <script>
+import {container} from "jenesius-vue-modal"; 
 export default {
+  components: {WidgetContainerModal: container},
+  name: "App",
   // Gestion de categorias por rol
   computed: {
     currentUser() {
@@ -102,6 +105,11 @@ export default {
 };
 </script>
 
-<style>
-   @import './assets/css/style.css';
+<style scoped>
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s ease;
+}
+.fade-enter-from, .fade-leave-to {
+  opacity: 0;
+}
 </style>
