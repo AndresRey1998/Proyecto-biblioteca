@@ -10,8 +10,10 @@ class AuthService {
         password: user.password
       })
       .then(response => {
-        if (response.data.token) {
-          console.log("Setteado")
+        console.log(response)
+        if(response.data.enable === false){
+          return console.log("LOCKED")
+        }else if (response.data.token) {
           localStorage.setItem('user', JSON.stringify(response.data));
         }
 

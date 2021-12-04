@@ -11,12 +11,16 @@ import 'vuetify/styles'
 import VueGoodTablePlugin from 'vue-good-table-next';
 import 'vue-good-table-next/dist/vue-good-table-next.css'
 import mitt from 'mitt';
+import Datepicker from 'vue3-date-time-picker';
+import 'vue3-date-time-picker/dist/main.css'
+import './index.css'
 
 loadFonts()
 const emitter = mitt();
 const app = createApp(App)
 
 app.provide('emitter', emitter);  
+app.component('Datepicker', Datepicker);
 
 app.use(router)
   .use(store)

@@ -22,16 +22,22 @@
 
       <v-divider class="my-5"></v-divider>
 
-      <v-btn v-if="currentUser.published"
+      <v-btn
+        v-if="currentUser.published"
         @click="updatePublished(false)"
-        color="primary" small class="mr-2"
+        color="primary"
+        small
+        class="mr-2"
       >
         UnPublish
       </v-btn>
 
-      <v-btn v-else
+      <v-btn
+        v-else
         @click="updatePublished(true)"
-        color="primary" small class="mr-2"
+        color="primary"
+        small
+        class="mr-2"
       >
         Publish
       </v-btn>
@@ -40,9 +46,7 @@
         Delete
       </v-btn>
 
-      <v-btn color="success" small @click="updateTutorial">
-        Update
-      </v-btn>
+      <v-btn color="success" small @click="updateTutorial"> Update </v-btn>
     </v-form>
 
     <p class="mt-3">{{ message }}</p>

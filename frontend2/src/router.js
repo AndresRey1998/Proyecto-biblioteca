@@ -12,6 +12,7 @@ const routes = [
     path: "/",
     name: "home",
     component: Home,
+    
   },
   {
     path: "/home",
@@ -58,14 +59,23 @@ const routes = [
     path: "/addUser",
     name: "addUser",
     component: () => import("./components/addUser")
-  }
+  },
+  {
+    path: "/addBook",
+    name: "addBook",
+    component: () => import("./components/Book")
+  },
+  {
+    path: "/listBook",
+    name: "listBook",
+    component: () => import("./components/BookList")
+  },
 ];
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
 });
-
 
 router.beforeEach((to, from, next) => {
   const publicPages = ['/login', '/register', '/home'];
