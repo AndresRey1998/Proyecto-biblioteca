@@ -43,6 +43,7 @@ public class AutenticacionController {
         response.setToken(jwtToken);
         response.setId(user.getUser().getId());
         response.setRol(user.getAuthorities().toString());
+        response.setEnable(user.isEnabled());
         return ResponseEntity.ok(response);
     }
 

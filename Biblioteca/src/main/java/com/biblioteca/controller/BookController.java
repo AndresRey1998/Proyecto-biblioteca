@@ -1,8 +1,6 @@
 package com.biblioteca.controller;
 
-import com.biblioteca.entity.Author;
 import com.biblioteca.entity.Book;
-import com.biblioteca.service.api.AuthorServiceAPI;
 import com.biblioteca.service.api.BookServiceAPI;
 import com.biblioteca.utils.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

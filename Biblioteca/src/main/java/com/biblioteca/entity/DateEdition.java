@@ -1,6 +1,7 @@
 package com.biblioteca.entity;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name="date_edition")
@@ -13,7 +14,7 @@ public class DateEdition {
     private Integer id;
 
     @Column(name = "date_edition")
-    private Integer date;
+    private Timestamp date;
 
     @ManyToOne
     @JoinColumn(name = "edition")
@@ -33,11 +34,11 @@ public class DateEdition {
         this.id = id;
     }
 
-    public Integer getDate() {
+    public Timestamp getDate() {
         return date;
     }
 
-    public void setDate(Integer date) {
+    public void setDate(Timestamp date) {
         this.date = date;
     }
 

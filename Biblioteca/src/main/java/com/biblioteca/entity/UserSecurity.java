@@ -51,7 +51,7 @@ public class UserSecurity implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return user.isEnable();
     }
 
     @Override
@@ -61,7 +61,7 @@ public class UserSecurity implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return user.isEnable();
     }
 
     public User getUser() {

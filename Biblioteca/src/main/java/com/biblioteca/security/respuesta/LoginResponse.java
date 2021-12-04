@@ -4,6 +4,15 @@ public class LoginResponse {
     private String token;
     private Integer id;
     private String rol;
+    private boolean enable;
+
+    public boolean isEnable() {
+        return enable;
+    }
+
+    public void setEnable(boolean enable) {
+        this.enable = enable;
+    }
 
     public String getRol() {
         return rol;
