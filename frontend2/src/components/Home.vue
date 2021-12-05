@@ -1,7 +1,9 @@
 <template>
-    <div>
-      
-      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+<div>
+    <full-page>  
+      <div class="section pt-60 pt-sm-80">
+      <div class="container">
+      <div class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
           <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
           <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -9,13 +11,13 @@
         </ol>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img class="d-block w-100" src="..." alt="First slide">
+            <img class="d-block w-100 " v-bind:src="require('../assets/img/carrusel-3.jpeg')" alt="First slide">
           </div>
           <div class="carousel-item">
-            <img class="d-block w-100" src="..." alt="Second slide">
+            <img class=" d-block w-100 " v-bind:src="require('../assets/img/carrusel-2.jpg')" alt="Second slide">
           </div>
           <div class="carousel-item">
-            <img class="d-block w-100" src="..." alt="Third slide">
+            <img class="d-block w-100 " v-bind:src="require('../assets/img/carrusel-3.jpeg')" alt="Third slide">
           </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -27,14 +29,42 @@
           <span class="sr-only">Next</span>
         </a>
       </div>
-           
-     
-    </div>
+      </div>
+      </div>  
+      
+      <div class="wrapper">
+        <div id="about" class="overlay-dark80 light-color pt-60 pt-sm-80 pb-sm-30" style="background:#323232;">
+            <div class="container text-left">
+                <div class="row">
+                    <div class="about-text col-md-7 mb-30">
+						<h3 class=" h3-white padding-20 shadow" style="background-color:#8BC6CA;">Sobre Nosotros</h3>
+						<div class="padding-20 shadow" style="margin:-10px 0 0 15px;background: rgba(255,255,255,0.08);">
+						<p class="p-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tristique rhoncus lectus et vulputate.
+                            Etiam dui tellus, fringilla id urna vel, porttitor molestie nulla. Sed at velit eu nunc dictum facilisis.
+                            Mauris in orci ultrices, molestie dolor sit amet, tempus neque. Pellentesque habitant morbi tristique
+                            senectus et netus et malesuada fames ac turpis egestas. Mauris gravida id quam a accumsan. Sed quis
+                            justo in massa ultrices pulvinar id et mauris. Donec at dapibus turpis.</p>
+						<p class="p-white">Fusce feugiat sapien ut mollis tincidunt. Praesent molestie ipsum quis purus molestie cursus.
+                             Suspendisse mattis vestibulum dui a hendrerit. Suspendisse potenti.</p>
+						<a href="404.html" class="btn-white btn-white:hover">DAME MÁS INFORMACIÓN</a>
+						</div>
+					</div>
+					<div class="col-xs-0 col-xs-offset-0 col-sm-1 col-md-offset-0 col-md-5">
+						<img class="aligncenter" v-bind:src="require('../assets/img/Sobre-Nosotros-2.png')" />
+					</div>
+                </div>
+            </div>
+        </div>
+      </div>
+      </full-page> 
+</div> 
+
 </template>
 
 <script>
 
-// import UserService from "../services/user.service";
+
+
 
 export default {
   name: "Home",
@@ -63,4 +93,5 @@ export default {
 
 <style>
    @import '../assets/css/style.css';
+
 </style>

@@ -17,6 +17,14 @@ p {
     color: #45226c;
     letter-spacing: 1px;
 }
+.p-white{
+    line-height: 20px;
+    font-size: 14px;
+    font-weight: 300;
+    margin: 0px 0 10px 0;
+    color: #eee;
+    letter-spacing: 1px;
+}
 h1, h2, h3, h4, h5, h6 {
     color: #45226c;
     text-transform: uppercase;
@@ -43,7 +51,15 @@ h3 {
     letter-spacing: 4px;
     line-height: 32px;
 }
-
+.h3-white
+{
+    color: #eee;
+    text-transform: uppercase;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
 h4 {
     font-size: 17px;
     letter-spacing: 2px;
@@ -121,8 +137,8 @@ h6 {
         -o-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2); 
 }
 .logo{
-    width: 230px;
-    margin-top: 8px;
+    width: 100px;
+    margin-top: 2px;
 }
 .dropdown {
     top: 100%;
@@ -175,4 +191,15 @@ h6 {
     .footer .footer-info p {
         color: #45226c;
     }
-    
+.li{
+    color: #eee;
+    font-size: 15px;
+    font-weight: 400;
+    font-family: 'Roboto', sans-serif;
+    -ms-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+    -o-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2); 
+} 
+.container
+{
+    margin-top: 3px;
+}  
