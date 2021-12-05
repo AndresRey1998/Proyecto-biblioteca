@@ -7,28 +7,26 @@ class UserDataService {
     return axios.get(API_URL + "getAll");
   }
 
-  updateUser(data) {
-    axios
+  async updateUser(data) {
+    return axios
       .get(API_URL + "findRecord/" + data.id_current)
       .then((response) => {
         console.log(response.data);
-        return axios.post(API_URL + "saveUser", {
+        
+          return axios.post(API_URL + "saveUser", {
           id: data.id_current,
           userName: data.userName,
           password: response.data.password,
           permits: response.data.permits,
-          roles: response.data.roles,
+          roles: data.roles.toString(),
           enable: response.data.enable,
           email: data.email,
-        });
-      })
-      .catch((e) => {
-        console.log(e);
+        })      
       });
   }
 
-  disableEnableUser(id) {
-    axios
+  async disableEnableUser(id) {
+    return axios
       .get(API_URL + "findRecord/" + id)
       .then((response) => {
         console.log(response.data);
@@ -48,9 +46,7 @@ class UserDataService {
           email: response.data.email,
         });
       })
-      .catch((e) => {
-        console.log(e);
-      });
+
   }
 }
 

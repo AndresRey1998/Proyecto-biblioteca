@@ -10,24 +10,43 @@
           :key="index"
           @click="setActiveBook(book, index)"
         >
-          {{ book.userName }}
+          {{ book.titleBook }}
         </li>
       </ul>
     </div>
 
     <div class="col-md-6">
       <div v-if="currentBook">
-        <h4>Book</h4>
+        <h4>Book details</h4>
         <div>
-          <label><strong>Title:</strong></label> {{ currentBook.id }}
+          <label><strong>ISSN/SSN:</strong></label> {{ currentBook.id }}
         </div>
         <div>
-          <label><strong>Description:</strong></label>
-          {{ currentBook.userName }}
+          <label><strong>Title:</strong></label> {{ currentBook.titleBook }}
+        </div>
+        <div>
+          <label><strong>Author/s:</strong></label>
+          {{ currentBook.author.name }}
+        </div>
+        <div>
+          <label><strong>Published by User:</strong></label>
+          {{ currentBook.user.userName }} 
+        </div>
+        <div>
+          <label><strong>Created in the library at:</strong></label>
+          {{ currentBook.date }} 
+        </div>
+        <div>
+          <label><strong>Editorial:</strong></label>
+          {{ currentBook.editorial.name }}
         </div>
         <div>
           <label><strong>Status:</strong></label>
-          {{ currentBook.published ? "Published" : "Pending" }}
+          {{ currentBook.availability ? "Available" : "Not Available" }}
+        </div>
+        <div>
+          <label><strong>URL Access:</strong></label>
+          {{ currentBook.url}}
         </div>
         <router-link
           :to="'/tutorials/' + currentBook.id"
@@ -48,7 +67,7 @@
 </template>
 
 <script>
-import UserDataService from "../../services/userData.service";
+import BookDataService from "../../services/bookData.service";
 
 export default {
   name: "book-list",
@@ -74,7 +93,7 @@ export default {
   methods: {
 
     retrieveBooks() {
-      UserDataService.getAll()
+      BookDataService.getCategoryBook(1)
         .then((response) => {
           this.books = response.data;
           console.log(response.data);

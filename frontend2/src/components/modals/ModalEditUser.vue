@@ -29,22 +29,22 @@
       label="Email"
       required
     ></v-text-field>
+    
 <v-layout row wrap>
 
 <v-flex md4 class="lg5-custom">    
   <v-checkbox 
-      v-model="selected"
+      v-model="roles"
       label="Admin"
-      value="admin"
+      value="ADMIN"
     ></v-checkbox></v-flex>
 
   <v-flex md4 class="lg5-custom">    
   <v-checkbox 
-      v-model="selected"
+      v-model="roles"
       label="User"
-      value="user"
+      value="USER"
     ></v-checkbox></v-flex>
-
 </v-layout>
   </v-form>  
         <v-list-item-subtitle>Warning, It is NOT possible to revert the changes after editing.</v-list-item-subtitle>
@@ -93,19 +93,33 @@ export default {
             const emitter = inject("emitter");
 
              emitter.emit('refreshEvent')
+             
 
   },
     props:{
       id: Number,
       username: String,
       email: String,
-      roles: String,
+      roles: Array,
       state: Boolean,
     },
-    methods:{
-
-    editUser() {
-      UserDataService.updateUser(this.data())
+  methods:{
+    async editUser() {
+      this.$swal.fire({
+        title: 'Wait a minute',
+        html: 'Editing user...',
+        allowOutsideClick: false,
+        didOpen: () => {
+          this.$swal.showLoading()
+      }})
+        
+        await UserDataService.updateUser(this.data())
+        .then(() => this.$swal.fire({title: 'Success', icon:'success'})).then(() =>{
+          this.$router.go(this.$router.currentRoute)
+        })
+        .catch((e) =>{
+          this.$swal.fire({title: 'Error. Try again.', icon:'error'})
+        })
     },
 
     closeModalEdit(){
@@ -117,6 +131,7 @@ export default {
         userName: this.username,
         email: this.email,
         state: this.state,
+        roles: this.roles
       }
     },
   }

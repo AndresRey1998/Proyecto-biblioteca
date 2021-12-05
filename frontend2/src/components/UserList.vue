@@ -1,12 +1,16 @@
 <template>
   <div>
-    <h1>List of users</h1>
+    <h1>List of users</h1>{{ myComputed }}
     <vue-good-table
       :columns="columns"
       :rows="users"
       :row-style-class="rowStyleClassFn"
       :paginate="true"
       :responsive="true"
+        :sort-options="{
+    enabled: true,
+    initialSortBy: {field: 'id', type: 'asc'}
+  }"
       :pagination-options="{
       enabled: true,
       mode: 'records',
@@ -26,13 +30,20 @@
                       </i>
                   </button>
                   <button size="sm" variant="danger" class="mr-2" title="Hapus" @click="disableEnableUser(props)">
-                    <i>
-                         Disable
-                      </i>
+                    <span v-if="props.column.field === 'actions'">
+                      <span v-if="props.row.state === true">
+                        <span style="font-weight: bold; color: red;">Disable</span> 
+                      </span>
+                    </span>
+                    <span v-if="props.column.field == 'actions'">
+                      <span v-if="props.row.state === false">
+                        <span style="font-weight: bold; color: green;">Enable</span> 
+                      </span>
+                    </span>
                   </button>
                 </span>
-                    <span v-if="props.column.field == 'state'">
-                      <span v-if="props.row.state == true">
+                    <span v-if="props.column.field === 'state'">
+                      <span v-if="props.row.state === true">
                         <span style="font-weight: bold; color: green;">Activated</span> 
                       </span>
                       <span v-else>
@@ -80,15 +91,28 @@ export default {
     columnFilterFn: function(data, filterString) {
     return data.includes(filterString);
   },
-    disableEnableUser(props){
-      UserDataService.disableEnableUser(props.row.id)
+    async disableEnableUser(props){
+
+      UserDataService.disableEnableUser(props.row.id)        
+      .then(() =>{ 
+        this.$swal.fire({title: 'Success', icon:'success'}).then(() =>{
+          this.$router.go(this.$router.currentRoute)
+        })
+      
+      })
+        .catch((e) =>{
+          this.$swal.fire({title: 'Error. Try again.', icon:'error'})
+        })
+        
+
     },
     modalEdit(props){
+      const listRoles = props.row.roles.split(",")
       openModal(ModalEditUser, {
         id: props.row.id,
         username: props.row.username,
         email: props.row.email,
-        roles: props.row.roles,
+        roles: listRoles,
         state: props.row.state
       })
       
@@ -135,12 +159,12 @@ export default {
         roles: user.roles
       };
     },
+
   },
   mounted() {
     this.retrieveUsers();
     const emitter = inject("emitter");
     emitter.on('refreshEvent', () => {
-      console.log("TRIGGER")
       this.retrieveUsers();
       this.refreshList()
       

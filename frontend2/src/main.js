@@ -14,6 +14,8 @@ import mitt from 'mitt';
 import Datepicker from 'vue3-date-time-picker';
 import 'vue3-date-time-picker/dist/main.css'
 import './index.css'
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
 
 loadFonts()
 const emitter = mitt();
@@ -26,6 +28,7 @@ app.use(router)
   .use(store)
   .use(vuetify)
   .use(VueGoodTablePlugin)
+  .use(VueSweetalert2)
   .component("font-awesome-icon", FontAwesomeIcon)
   .mount("#app");
 

@@ -31,7 +31,7 @@ class AuthService {
       email: user.email,
       password: user.password,
       roles: "USER",
-      permits: "USER,ADMIN",
+      permits: "USER",
       enable: true
     });
   }
