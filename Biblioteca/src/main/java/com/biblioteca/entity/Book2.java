@@ -1,10 +1,9 @@
 package com.biblioteca.entity;
 
 import javax.persistence.*;
-
 @Entity
-@Table(name="book")
-public class Book {
+@Table(name="book2")
+public class Book2 extends Book {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -46,7 +45,6 @@ public class Book {
     @ManyToOne
     @JoinColumn(name = "id_edition")
     private EditionBook edition;
-    public Book(){}
 
     public EditionBook getEdition() {
         return edition;
@@ -136,3 +134,4 @@ public class Book {
         this.dateC = dateC;
     }
 }
+
