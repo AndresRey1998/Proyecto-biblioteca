@@ -5,6 +5,7 @@ public class LoginResponse {
     private Integer id;
     private String rol;
     private boolean enable;
+    private String nombre;
 
     public boolean isEnable() {
         return enable;
@@ -36,5 +37,13 @@ public class LoginResponse {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 }

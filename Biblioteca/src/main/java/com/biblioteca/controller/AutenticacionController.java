@@ -44,6 +44,7 @@ public class AutenticacionController {
         response.setId(user.getUser().getId());
         response.setRol(user.getAuthorities().toString());
         response.setEnable(user.isEnabled());
+        response.setNombre(user.getUsername());
         return ResponseEntity.ok(response);
     }
 
