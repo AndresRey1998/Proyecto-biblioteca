@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8092/user/";
+const API_URL = process.env.VUE_APP_API_USER;
 
 class UserDataService {
   getAll() {
@@ -23,6 +23,10 @@ class UserDataService {
           email: data.email,
         })      
       });
+  }
+
+  async getCurrentUser(id){
+    return axios.get(API_URL + "findRecord/" + id)
   }
 
   async disableEnableUser(id) {

@@ -48,11 +48,24 @@
           <label><strong>URL Access:</strong></label>
           {{ currentBook.url}}
         </div>
-        <router-link
-          :to="'/tutorials/' + currentBook.id"
+        <v-button
+          class="badge badge-success"
+          @click="setActiveBook()"
+          >Access book
+        </v-button>
+  
+        <v-button
           class="badge badge-warning"
-          >Edit</router-link
-        >
+          @click="setActiveBook()"
+          >Edit
+        </v-button>
+         <span v-if="currentBook.user.id === userCurrent.id">
+        <v-button
+          class="badge badge-danger"
+          @click="setActiveBook()"
+          >Delete
+        </v-button>
+        </span>
       </div>
       <div v-else>
         <br />
@@ -81,6 +94,7 @@ export default {
   },
   data() {
     return {
+      userCurrent: {},
       books: [],
       booksPage: [],
       currentBook: null,
@@ -91,7 +105,10 @@ export default {
     };
   },
   methods: {
-
+    retrieveCurrentUser(){
+      let user = JSON.parse(localStorage.getItem('user'));
+      this.userCurrent = user;
+    },
     retrieveBooks() {
       BookDataService.getCategoryBook(1)
         .then((response) => {
@@ -116,6 +133,7 @@ export default {
   },
   mounted() {
     this.retrieveBooks();
+    this.retrieveCurrentUser();
   },
 };
 </script>

@@ -1,7 +1,7 @@
 <template>
   <v-layout row wrap>
     <div class="col-md-6">
-      <h4>Scientifc article List</h4>
+      <h4>Scientific Article List</h4>
       <ul class="list-group">
         <li
           class="list-group-item"
@@ -10,30 +10,61 @@
           :key="index"
           @click="setActiveBook(book, index)"
         >
-          {{ book.userName }}
+          {{ book.titleBook }}
         </li>
       </ul>
     </div>
 
     <div class="col-md-6">
       <div v-if="currentBook">
-        <h4>Book</h4>
+        <h4>Book details</h4>
         <div>
-          <label><strong>Title:</strong></label> {{ currentBook.id }}
+          <label><strong>ISSN/SSN:</strong></label> {{ currentBook.id }}
         </div>
         <div>
-          <label><strong>Description:</strong></label>
-          {{ currentBook.userName }}
+          <label><strong>Title:</strong></label> {{ currentBook.titleBook }}
+        </div>
+        <div>
+          <label><strong>Author/s:</strong></label>
+          {{ currentBook.author.name }}
+        </div>
+        <div>
+          <label><strong>Published by User:</strong></label>
+          {{ currentBook.user.userName }} 
+        </div>
+        <div>
+          <label><strong>Created in the library at:</strong></label>
+          {{ currentBook.date }} 
+        </div>
+        <div>
+          <label><strong>Editorial:</strong></label>
+          {{ currentBook.editorial.name }}
         </div>
         <div>
           <label><strong>Status:</strong></label>
-          {{ currentBook.published ? "Published" : "Pending" }}
+          {{ currentBook.availability ? "Available" : "Not Available" }}
         </div>
-        <router-link
-          :to="'/tutorials/' + currentBook.id"
+        <div>
+          <label><strong>URL Access:</strong></label>
+          {{ currentBook.url}}
+        </div>
+        <v-button
+          class="badge badge-success"
+          @click="setActiveBook()"
+          >Access book
+        </v-button>
+        <v-button
           class="badge badge-warning"
-          >Edit</router-link
-        >
+          @click="setActiveBook()"
+          >Edit
+        </v-button>
+        <span v-if="currentBook.user.id === userCurrent.id">
+        <v-button
+          class="badge badge-danger"
+          @click="setActiveBook()"
+          >Delete
+        </v-button>
+        </span>
       </div>
       <div v-else>
         <br />
@@ -48,10 +79,10 @@
 </template>
 
 <script>
-import UserDataService from "../../services/userData.service";
+import BookDataService from "../../services/bookData.service";
 
 export default {
-  name: "scientific-list",
+  name: "book-list",
   computed: {
     visiblePages() {
       return this.books.slice(
@@ -62,6 +93,7 @@ export default {
   },
   data() {
     return {
+      userCurrent: {},
       books: [],
       booksPage: [],
       currentBook: null,
@@ -72,9 +104,12 @@ export default {
     };
   },
   methods: {
-
+    retrieveCurrentUser(){
+      let user = JSON.parse(localStorage.getItem('user'));
+      this.userCurrent = user;
+    },
     retrieveBooks() {
-      UserDataService.getAll()
+      BookDataService.getCategoryBook(3)
         .then((response) => {
           this.books = response.data;
           console.log(response.data);
@@ -97,6 +132,7 @@ export default {
   },
   mounted() {
     this.retrieveBooks();
+    this.retrieveCurrentUser();
   },
 };
 </script>

@@ -74,9 +74,9 @@
                   placeholder="Regular input"
                   v-model="book.category"
                 >
-                  <option>Book</option>
-                  <option>Scientific Article</option>
-                  <option>Presentation</option>
+                  <option value=1>Book</option>
+                  <option value=3>Scientific Article</option>
+                  <option value=2>Presentation</option>
                 </select>
                 <div
                   class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none"
@@ -142,7 +142,7 @@ export default {
         date: Date,
         author: "",
         url: "",
-        category: "",
+        category: null,
       },
     };
   },

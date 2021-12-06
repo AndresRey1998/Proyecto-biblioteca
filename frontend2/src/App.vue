@@ -21,7 +21,7 @@
             style=" all: unset;"
             v-bind="props"
           >
-            Users
+            CRUDS
           </v-btn>
         </template>
         <v-card
@@ -30,10 +30,11 @@
     tile
   >
         <v-list>
-            <router-link to="/addUser" class="nav-link">Add</router-link>
-            <router-link to="/listUser" class="nav-link">List</router-link>
+            <router-link to="/listUser" class="nav-link">Users</router-link>
+            <router-link to="/listEditorial" class="nav-link">Editorials</router-link>
+            <router-link to="/listAuthor" class="nav-link">Authors</router-link>
         </v-list>
-          </v-card>
+        </v-card>
 
       </v-menu>
       
@@ -85,7 +86,7 @@
         <li class="li nav-item">
           <router-link to="/profile" class="nav-link">
             <font-awesome-icon icon="user" />
-            {{ currentUser.username }}
+           {{ currentRecordUser }} 
           </router-link>
         </li>
         <li class="li nav-item">
@@ -119,7 +120,6 @@ export default {
       if (this.currentUser && this.currentUser['rol']) {
         return this.currentUser['rol'].includes('ADMIN');
       }
-
       return false;
     },
   },
@@ -127,7 +127,7 @@ export default {
     logOut() {
       this.$store.dispatch('auth/logout');
       this.$router.push('/login');
-    }
+    },
   }
 };
 </script>

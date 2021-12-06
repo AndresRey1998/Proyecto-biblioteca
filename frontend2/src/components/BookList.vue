@@ -23,7 +23,7 @@
               'text-white bg-pink-600': openTab === 2,
             }"
           >
-            <i class="fas fa-cog text-base mr-1"></i> Scientic Articles
+            <i class="fas fa-cog text-base mr-1"></i> Scientific Articles
           </a>
         </li>
         <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
@@ -61,7 +61,6 @@
 </template>
 
 <script>
-import UserDataService from "../services/userData.service";
 import ScientificList from './bookList/ScientificList.vue';
 import PresentationList from './bookList/PresentationList.vue';
 import BookList from './bookList/BookList.vue';

@@ -70,6 +70,16 @@ const routes = [
     name: "listBook",
     component: () => import("./components/BookList")
   },
+  {
+    path: "/listAuthor",
+    name: "listAuthor",
+    component: () => import("./components/AuthorList")
+  },
+  {
+    path: "/listEditorial",
+    name: "listEditorial",
+    component: () => import("./components/EditorialList")
+  },
 ];
 
 const router = createRouter({
